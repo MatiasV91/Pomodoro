@@ -160,5 +160,11 @@
   <ItemGroup>
     <Resource Include="red_bell_icon-icons.com_59499.ico" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\red_bell_icon-icons.com_59499.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\management-Freepik.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

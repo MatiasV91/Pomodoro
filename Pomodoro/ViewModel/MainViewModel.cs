@@ -19,6 +19,7 @@ namespace Pomodoro.ViewModel
 
         public MainViewModel(ITimerService timer,IDataService data)
         {
+            WindowTitle = "Pomodoro";
             StartCommand = new DelegateCommand(OnStartExecute);
             ResetCommand = new DelegateCommand(OnResetExecute);
             _timer = timer;
@@ -28,6 +29,7 @@ namespace Pomodoro.ViewModel
             Settings = _data.LoadSettings();
         }
 
+        public string WindowTitle { get; set; }
         public ITimerService Timer => _timer;
         public ICommand StartCommand { get; }
         public ICommand ResetCommand { get; }
