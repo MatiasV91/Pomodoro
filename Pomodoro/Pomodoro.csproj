@@ -86,6 +86,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Converters\RepToVisivilityConverter.cs" />
+    <Compile Include="Model\Duration.cs" />
     <Compile Include="Service\ITimerService.cs" />
     <Compile Include="Service\TimerService.cs" />
     <Compile Include="Startup\Boostrapper.cs" />
@@ -133,6 +135,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Tomato.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\circle-Freepik.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\roundabout-Pixelmeetup.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

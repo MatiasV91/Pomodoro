@@ -7,44 +7,44 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Pomodoro.Service;
 using Prism.Events;
+using Pomodoro.Model;
 
 namespace Pomodoro.ViewModel
 {
     public class MainViewModel : ViewModelBase
     {
-        private int _reps = 1;
-        private int _workMinutes = 6;
-        private int _shortBreakMinutes = 5;
-        private int _longBreakMinutes = 20;
-        private ITimerService _currentTimer;
+        private readonly ITimerService _timer;
+        private int _repetitions;
 
-        public MainViewModel(ITimerService currentTimer,IEventAggregator eventAggregator)
+        public MainViewModel(ITimerService timer)
         {
             StartCommand = new DelegateCommand(OnStartExecute);
             ResetCommand = new DelegateCommand(OnResetExecute);
-            _currentTimer = currentTimer;
-            _currentTimer.TimerEnded += _currentTimer_TimerEnded;
+            _timer = timer;
+            _timer.TimerEnded += _currentTimer_TimerEnded;
+            Repetitions = 1;
+            Settings = new Duration();
         }
 
-        public ITimerService Timer
-        {
-            get
-            {
-                return _currentTimer;
-            }
-            set
-            {
-                _currentTimer = value;
-            }
-        }
-
+        public ITimerService Timer => _timer;
         public ICommand StartCommand { get; }
         public ICommand ResetCommand { get; }
+        public Duration Settings { get; set; }
 
+        public int Repetitions
+        {
+            get => _repetitions;
+            set
+            {
+                _repetitions = value;
+                OnPropertyChanged();
+            }
+        }
 
         private void OnResetExecute()
         {
-            throw new NotImplementedException();
+            _timer.TimerReset();
+            Repetitions = 1;
         }
 
         private void OnStartExecute()
@@ -54,23 +54,23 @@ namespace Pomodoro.ViewModel
 
         private void ManageTimer()
         {
-            if (_reps % 2 != 0)
+            if (Repetitions % 2 != 0)
             {
-                Timer.TimerSet(_workMinutes);
+                Timer.TimerSet(Settings.WorkMinutes);
             }
-            else if (_reps % 8 == 0)
+            else if (Repetitions % 8 == 0)
             {
-                Timer.TimerSet(_longBreakMinutes);
+                Timer.TimerSet(Settings.LongBreakMinutes);
             }
             else
             {
-                Timer.TimerSet(_shortBreakMinutes);
+                Timer.TimerSet(Settings.ShortBreakMinutes);
             }
         }
 
         private void _currentTimer_TimerEnded(object sender, EventArgs e)
         {
-            _reps += 1;
+            Repetitions += 1;
             ManageTimer();
         }
 

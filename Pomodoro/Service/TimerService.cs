@@ -1,4 +1,5 @@
-﻿using Pomodoro.ViewModel;
+﻿using Pomodoro.Properties;
+using Pomodoro.ViewModel;
 using Prism.Events;
 using System;
 using System.Collections.Generic;
@@ -64,12 +65,12 @@ namespace Pomodoro.Service
 
         public void TimerReset()
         {
-            //_time = new TimeSpan(_originalTime);
-            //TimerStopped = false;
-            //OnPropertyChanged(nameof(Time));
+            _timer.Stop();
+            _time = TimeSpan.FromSeconds(0);
+            OnPropertyChanged(nameof(Time));
         }
 
 
-        
+
     }
 }

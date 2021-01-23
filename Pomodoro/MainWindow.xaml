@@ -4,12 +4,17 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Pomodoro"
+        xmlns:conv="clr-namespace:Pomodoro.Converters"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
+    <Window.Resources>
+        <conv:RepToVisivilityConverter x:Key="RepToVisivilityConverter"></conv:RepToVisivilityConverter>
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="250"/>
+            <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -19,7 +24,13 @@
         <Label Content="Timer" Grid.ColumnSpan="2" HorizontalAlignment="Center"/>
         <Image Grid.Row="1" Grid.ColumnSpan="2" Source="/Pomodoro;component/Images/Tomato.png" />
         <Label Grid.Row="1" Grid.ColumnSpan="2" Content="{Binding Timer.Time,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <Button Grid.Row="2" Content="Start"  Command="{Binding StartCommand}"/>
-        <Button Grid.Row="2" Grid.Column="1" Content="Reset"  />
+        <StackPanel Grid.Row="2" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Image Grid.Row="2" Grid.ColumnSpan="2" Source="/Pomodoro;component/Images/roundabout-Pixelmeetup.png " Visibility="{Binding Repetitions,Converter={StaticResource RepToVisivilityConverter},ConverterParameter=1}" Margin="20 0" RenderOptions.BitmapScalingMode="Fant"></Image>
+            <Image Grid.Row="2" Grid.ColumnSpan="2" Source="/Pomodoro;component/Images/roundabout-Pixelmeetup.png " Visibility="{Binding Repetitions,Converter={StaticResource RepToVisivilityConverter},ConverterParameter=2}" Margin="20 0" RenderOptions.BitmapScalingMode="Fant"></Image>
+            <Image Grid.Row="2" Grid.ColumnSpan="2" Source="/Pomodoro;component/Images/roundabout-Pixelmeetup.png " Visibility="{Binding Repetitions,Converter={StaticResource RepToVisivilityConverter},ConverterParameter=3}" Margin="20 0" RenderOptions.BitmapScalingMode="Fant"></Image>
+            <Image Grid.Row="2" Grid.ColumnSpan="2" Source="/Pomodoro;component/Images/roundabout-Pixelmeetup.png " Visibility="{Binding Repetitions,Converter={StaticResource RepToVisivilityConverter},ConverterParameter=4}" Margin="20 0" RenderOptions.BitmapScalingMode="Fant"></Image>
+        </StackPanel>
+        <Button Grid.Row="3" Content="Start"  Command="{Binding StartCommand}"/>
+        <Button Grid.Row="3" Grid.Column="1" Content="Reset"  Command="{Binding ResetCommand}"/>
     </Grid>
 </Window>

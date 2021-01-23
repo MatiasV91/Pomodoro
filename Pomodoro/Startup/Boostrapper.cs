@@ -15,7 +15,6 @@ namespace Pomodoro.Startup
         public IContainer Bootstrap()
         {
             var builder = new ContainerBuilder();
-            builder.RegisterType<EventAggregator>().As<IEventAggregator>().SingleInstance();
             builder.RegisterType<MainWindow>().AsSelf();
             builder.RegisterType<MainViewModel>().AsSelf();
             builder.RegisterType<TimerService>().As<ITimerService>();
