@@ -14,16 +14,18 @@ namespace Pomodoro.ViewModel
     public class MainViewModel : ViewModelBase
     {
         private readonly ITimerService _timer;
+        private readonly IDataService _data;
         private int _repetitions;
 
-        public MainViewModel(ITimerService timer)
+        public MainViewModel(ITimerService timer,IDataService data)
         {
             StartCommand = new DelegateCommand(OnStartExecute);
             ResetCommand = new DelegateCommand(OnResetExecute);
             _timer = timer;
+            _data = data;
             _timer.TimerEnded += _currentTimer_TimerEnded;
             Repetitions = 1;
-            Settings = new Duration();
+            Settings = _data.LoadSettings();
         }
 
         public ITimerService Timer => _timer;
