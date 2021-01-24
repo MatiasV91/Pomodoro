@@ -46,7 +46,9 @@ namespace Pomodoro
 
         private void OnOptionsButtonClick(object sender, RoutedEventArgs e)
         {
+            _viewModel.ResetCommand.Execute(null);
             var window = new SettingsView();
+            window.DataContext = this.DataContext;
             window.Show();
         }
     }

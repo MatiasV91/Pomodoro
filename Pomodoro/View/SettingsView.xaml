@@ -5,21 +5,40 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Pomodoro.View"
         mc:Ignorable="d"
-        Title="SettingsView" Height="450" Width="800">
-    <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+        Title="SettingsView" Height="400" Width="600">
+    <Grid HorizontalAlignment="Center" VerticalAlignment="Center" >
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <Label Content="Amount of minutes for work session" Margin="50 0"/>
-        <TextBox Grid.Row="1" />
-        <Label Grid.Row="2" Content="Amount of Minutes for Short Breaks"></Label>
-        <TextBox Grid.Row="3" />
-        <Label Grid.Row="4" Content="Amount of Minutes for Long Breaks"></Label>
-        <TextBox Grid.Row="5" />
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Label Grid.Row="0" Grid.Column="0" Content="Minutes for Work Session: "/>
+        <TextBox x:Name="WorkMinutes" Grid.Row="0" Grid.Column="1" Text="{Binding Settings.WorkMinutes,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" TextAlignment="Center" Padding="20" FontSize="16"/>
+        <Label Grid.Row="1" Grid.Column="0" Content="Minutes for Short Breaks: "></Label>
+        <TextBox x:Name="ShortBreakMinutes" Grid.Row="1" Grid.Column="1" Text="{Binding Settings.ShortBreakMinutes,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" TextAlignment="Center" Padding="20" FontSize="16"/>
+        <Label Grid.Row="2" Content="Minutes for Long Breaks: "></Label>
+        <TextBox x:Name="LongBreakMinutes" Grid.Row="2" Grid.Column="1" Text="{Binding Settings.LongBreakMinutes,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" TextAlignment="Center" Padding="20" FontSize="16"/>
+        <Button Grid.Row="3" Grid.Column="1" HorizontalAlignment="Right" Content="Save" Command="{Binding SaveSettingsCommand}" Click="AfterSaved">
+            <Button.Style>
+                <Style TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}" >
+                    <Setter Property="IsEnabled" Value="false" />
+                    <Style.Triggers>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding ElementName=WorkMinutes, Path=(Validation.HasError)}" Value="false" />
+                                <Condition Binding="{Binding ElementName=ShortBreakMinutes, Path=(Validation.HasError)}" Value="false" />
+                                <Condition Binding="{Binding ElementName=LongBreakMinutes, Path=(Validation.HasError)}" Value="false" />
+                            </MultiDataTrigger.Conditions>
+                            <Setter Property="IsEnabled" Value="true" />
+                        </MultiDataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
     </Grid>
 </Window>

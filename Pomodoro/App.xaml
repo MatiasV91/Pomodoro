@@ -14,7 +14,7 @@
                 <Setter Property="BorderBrush" Value="#ef4f4f"/>
                 <Setter Property="WindowChrome.IsHitTestVisibleInChrome" Value="True"></Setter>
             </Style>
-            <Style TargetType="Label" BasedOn="{StaticResource {x:Type Label}}">
+            <Style TargetType="Label">
                 <Setter Property="Foreground" Value="White"/>
                 <Setter Property="FontSize" Value="30"/>
             </Style>

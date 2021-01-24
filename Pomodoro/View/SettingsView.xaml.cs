@@ -23,5 +23,10 @@ namespace Pomodoro.View
         {
             InitializeComponent();
         }
+
+        private void AfterSaved(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }

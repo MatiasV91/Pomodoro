@@ -22,6 +22,7 @@ namespace Pomodoro.ViewModel
             WindowTitle = "Pomodoro";
             StartCommand = new DelegateCommand(OnStartExecute);
             ResetCommand = new DelegateCommand(OnResetExecute);
+            SaveSettingsCommand = new DelegateCommand(OnSaveSettingsExecute);
             _timer = timer;
             _data = data;
             _timer.TimerEnded += _currentTimer_TimerEnded;
@@ -29,10 +30,16 @@ namespace Pomodoro.ViewModel
             Settings = _data.LoadSettings();
         }
 
+        private void OnSaveSettingsExecute()
+        {
+            _data.SaveSettings(Settings);
+        }
+
         public string WindowTitle { get; set; }
         public ITimerService Timer => _timer;
         public ICommand StartCommand { get; }
         public ICommand ResetCommand { get; }
+        public ICommand SaveSettingsCommand { get; }
         public Duration Settings { get; set; }
 
         public int Repetitions
