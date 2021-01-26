@@ -35,11 +35,6 @@ namespace Pomodoro.ViewModel
             Settings = _data.LoadSettings();
         }
 
-        private void OnSaveSettingsExecute()
-        {
-            _data.SaveSettings(Settings);
-        }
-
         public string WindowTitle { get; set; }
         public ITimerService Timer => _timer;
         public ICommand StartCommand { get; }
@@ -104,6 +99,11 @@ namespace Pomodoro.ViewModel
             Repetitions += 1;
             if (Settings.PlaySound) _sound.PlaySound();
             ManageTimer();
+        }
+
+        private void OnSaveSettingsExecute()
+        {
+            _data.SaveSettings(Settings);
         }
 
     }

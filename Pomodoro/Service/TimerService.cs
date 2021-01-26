@@ -56,7 +56,7 @@ namespace Pomodoro.Service
             {
                 _timer.Stop();
             }
-            _time = TimeSpan.FromSeconds(minutes);
+            _time = TimeSpan.FromMinutes(minutes);
             OnPropertyChanged(nameof(Time));
             _timer.Start();
         }
