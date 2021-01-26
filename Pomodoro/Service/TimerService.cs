@@ -22,7 +22,6 @@ namespace Pomodoro.Service
 
         private TimeSpan _time;
         private DispatcherTimer _timer;
-
         public event EventHandler TimerEnded;
 
         public string Time
@@ -33,8 +32,7 @@ namespace Pomodoro.Service
             }
         }
 
-
-        public void TimerCreate()
+        private void TimerCreate()
         {
             _timer = new DispatcherTimer();
             _timer.Interval = TimeSpan.FromSeconds(1);
@@ -48,7 +46,7 @@ namespace Pomodoro.Service
             if (_time.Ticks < 0)
             {
                 _timer.Stop();
-                TimerEnded.Invoke(this, EventArgs.Empty);
+                TimerEnded?.Invoke(this, EventArgs.Empty);
             }
         }
 

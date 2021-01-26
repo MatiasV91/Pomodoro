@@ -9,7 +9,7 @@ namespace Pomodoro.Service
 {
     public interface IDataService
     {
-        void SaveSettings(Duration duration);
-        Duration LoadSettings();
+        void SaveSettings(Settings duration);
+        Settings LoadSettings();
     }
 }

@@ -15,16 +15,21 @@ namespace Pomodoro.ViewModel
     {
         private readonly ITimerService _timer;
         private readonly IDataService _data;
+        private readonly ISoundService _sound;
         private int _repetitions;
+        private string _tittle;
 
-        public MainViewModel(ITimerService timer,IDataService data)
+
+        public MainViewModel(ITimerService timer, IDataService data,ISoundService sound)
         {
             WindowTitle = "Pomodoro";
+            Tittle = "Timer";
             StartCommand = new DelegateCommand(OnStartExecute);
             ResetCommand = new DelegateCommand(OnResetExecute);
             SaveSettingsCommand = new DelegateCommand(OnSaveSettingsExecute);
             _timer = timer;
             _data = data;
+            _sound = sound;
             _timer.TimerEnded += _currentTimer_TimerEnded;
             Repetitions = 1;
             Settings = _data.LoadSettings();
@@ -40,7 +45,17 @@ namespace Pomodoro.ViewModel
         public ICommand StartCommand { get; }
         public ICommand ResetCommand { get; }
         public ICommand SaveSettingsCommand { get; }
-        public Duration Settings { get; set; }
+        public Settings Settings { get; set; }
+
+        public string Tittle
+        {
+            get => _tittle; 
+            set
+            {
+                _tittle = value;
+                OnPropertyChanged();
+            }
+        }
 
         public int Repetitions
         {
@@ -56,10 +71,12 @@ namespace Pomodoro.ViewModel
         {
             _timer.TimerReset();
             Repetitions = 1;
+            Tittle = "Timer";
         }
 
         private void OnStartExecute()
         {
+            OnResetExecute();
             ManageTimer();
         }
 
@@ -68,13 +85,16 @@ namespace Pomodoro.ViewModel
             if (Repetitions % 2 != 0)
             {
                 Timer.TimerSet(Settings.WorkMinutes);
+                Tittle = "Work";
             }
             else if (Repetitions % 8 == 0)
             {
+                Tittle = "Long Break";
                 Timer.TimerSet(Settings.LongBreakMinutes);
             }
             else
             {
+                Tittle = "Short Break";
                 Timer.TimerSet(Settings.ShortBreakMinutes);
             }
         }
@@ -82,6 +102,7 @@ namespace Pomodoro.ViewModel
         private void _currentTimer_TimerEnded(object sender, EventArgs e)
         {
             Repetitions += 1;
+            if (Settings.PlaySound) _sound.PlaySound();
             ManageTimer();
         }
 

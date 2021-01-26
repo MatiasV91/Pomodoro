@@ -19,6 +19,7 @@ namespace Pomodoro.Startup
             builder.RegisterType<MainViewModel>().AsSelf();
             builder.RegisterType<TimerService>().As<ITimerService>();
             builder.RegisterType<DataService>().As<IDataService>();
+            builder.RegisterType<SoundService>().As<ISoundService>();
             return builder.Build();
         }
     }

@@ -7,11 +7,12 @@ using System.Threading.Tasks;
 
 namespace Pomodoro.Model
 {
-    public class Duration : ViewModelBase
+    public class Settings : ViewModelBase
     {
         private int _workMinutes = 6;
         private int _shortBreakMinutes = 5;
         private int _longBreakMinutes = 20;
+        private bool _playSound = true;
 
         public int WorkMinutes
         {
@@ -44,5 +45,14 @@ namespace Pomodoro.Model
             }
         }
 
+        public bool PlaySound
+        {
+            get  => _playSound; 
+            set
+            {
+                _playSound = value;
+                OnPropertyChanged();
+            }
+        }
     }
 }
