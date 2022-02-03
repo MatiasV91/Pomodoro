@@ -1,4 +1,4 @@
-Pomodoro WPF App  (compilar Visual studio community 2019) 
+Pomodoro WPF App  (compilar en Visual studio community 2019) 
 
 
 Basado en la "[tecnica pomodoro](https://es.wikipedia.org/wiki/T%C3%A9cnica_Pomodoro)"
