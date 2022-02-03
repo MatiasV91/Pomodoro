@@ -9,7 +9,7 @@ namespace Pomodoro.Model
 {
     public class Settings : ViewModelBase
     {
-        private int _workMinutes = 6;
+        private int _workMinutes = 25;
         private int _shortBreakMinutes = 5;
         private int _longBreakMinutes = 20;
         private bool _playSound = true;
