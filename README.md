@@ -3,7 +3,7 @@ Pomodoro WPF App
 
 Utiliza C# and WPF
 
-Basado en la "[tecnica pomodoro](https://es.wikipedia.org/wiki/T%C3%A9cnica_Pomodoro)"
+Basado en la "[Tecnica pomodoro](https://es.wikipedia.org/wiki/T%C3%A9cnica_Pomodoro)"
 
 
 ![start](https://user-images.githubusercontent.com/31046332/152335543-c034c758-1443-4f96-8d91-7dedbaf35b36.PNG)
