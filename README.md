@@ -1,4 +1,4 @@
-Pomodoro WPF App
+# Pomodoro WPF App
 
 
 Utiliza C# and WPF con Patron de arquitectura MVVM
