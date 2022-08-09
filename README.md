@@ -1,7 +1,8 @@
 Pomodoro WPF App
 
 
-Utiliza C# and WPF
+Utiliza C# and WPF con Patron de arquitectura MVVM
+
 
 Basado en la "[Tecnica pomodoro](https://es.wikipedia.org/wiki/T%C3%A9cnica_Pomodoro)"
 
